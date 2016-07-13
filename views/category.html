@@ -1,0 +1,58 @@
+    {{template "header"}}
+    <title>分类 - 我的 beego 博客</title>
+</head>
+<body>
+{{template "navbar" .}}
+    <div class="container">
+    <h1>分类列表</h1>
+    <form method="GET" action="/category" id="asd">
+        <input type="hidden" name="op" value="add"/>
+        <div class="form-group">
+            <label for="exampleInputname">分类名称</label>
+            <input type="text" class="form-control" id="exampleInputname" placeholder="Enter name" name="name">
+        </div>
+    </form>
+        <input type="button" class="btn btn-default" onclick="checkInput();" value="添加">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>名称</th>
+                <th>文章数</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Categories}}
+            <tr>
+                <th>{{.Id}}</th>
+                <th>{{.Title}}</th>
+                <th>{{.TopicCount}}</th>
+                <th><a href="/category?op=del&id={{.Id}}">删除</a></th>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+
+    </div>
+
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+        function checkInput(){
+            console.log('qweqweqe')
+            var name = document.getElementById("exampleInputname")
+            if (name.value.length==0) {
+                alert("请输入分类名称")
+                return false
+            }
+            else{
+                document.getElementById("asd").submit()
+            }
+
+        }
+        </script>
+
+</body>
+</html>
